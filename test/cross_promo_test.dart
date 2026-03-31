@@ -15,10 +15,17 @@ void main() {
     expect(app.descriptionFor('de'), 'English'); // fallback to en
   });
 
+  test('Catalog localized getters work', () {
+    expect(fallbackCatalog.sectionTitleFor('fr'), 'Découvre nos apps');
+    expect(fallbackCatalog.buttonLabelFor('fr'), 'Obtenir');
+    expect(fallbackCatalog.sectionTitleFor('zh'), 'Discover our apps');
+    expect(fallbackCatalog.buttonLabelFor('zh'), 'Get');
+  });
+
   test('fallbackCatalog contains apps', () {
-    expect(fallbackCatalog.length, greaterThanOrEqualTo(2));
-    expect(fallbackCatalog.any((a) => a.id == 'tic_tac_go'), true);
-    expect(fallbackCatalog.any((a) => a.id == 'aouh'), true);
+    expect(fallbackCatalog.apps.length, greaterThanOrEqualTo(2));
+    expect(fallbackCatalog.apps.any((a) => a.id == 'tic_tac_go'), true);
+    expect(fallbackCatalog.apps.any((a) => a.id == 'aouh'), true);
   });
 
   test('CatalogService builds correct icon URL', () {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/app_catalog.dart';
 import '../data/catalog_service.dart';
 import '../models/app_info.dart';
+import '../models/catalog.dart';
 import '../models/cross_promo_style.dart';
 import 'cross_promo_card.dart';
 
@@ -10,7 +11,7 @@ import 'cross_promo_card.dart';
 ///
 /// Fetches the catalog from the remote repo on first build.
 /// Falls back to the embedded catalog if offline.
-/// Filters out the current app via [excludeAppId].
+/// All text (title, button label, descriptions) comes from the catalog.
 class CrossPromoSection extends StatefulWidget {
   /// The ID of the current app to exclude from the list.
   final String excludeAppId;
@@ -18,7 +19,7 @@ class CrossPromoSection extends StatefulWidget {
   /// The catalog service instance. If null, uses fallback catalog only.
   final CatalogService? catalogService;
 
-  /// Section title. Defaults to localized "Discover our apps".
+  /// Override the section title (bypasses catalog translation).
   final String? title;
 
   /// Optional style overrides.
@@ -40,28 +41,16 @@ class CrossPromoSection extends StatefulWidget {
     this.showTitle = true,
   });
 
-  static const _defaultTitles = {
-    'en': 'Discover our apps',
-    'fr': 'Découvre nos apps',
-    'es': 'Descubre nuestras apps',
-    'de': 'Entdecke unsere Apps',
-    'it': 'Scopri le nostre app',
-    'pt': 'Descobre as nossas apps',
-    'nl': 'Ontdek onze apps',
-  };
-
   @override
   State<CrossPromoSection> createState() => _CrossPromoSectionState();
 }
 
 class _CrossPromoSectionState extends State<CrossPromoSection> {
-  late List<AppInfo> _apps;
+  Catalog _catalog = fallbackCatalog;
 
   @override
   void initState() {
     super.initState();
-    // Start with fallback immediately so there's no blank flash
-    _apps = fallbackCatalog;
     _fetchCatalog();
   }
 
@@ -70,22 +59,21 @@ class _CrossPromoSectionState extends State<CrossPromoSection> {
     if (service == null) return;
     final catalog = await service.getCatalog();
     if (mounted) {
-      setState(() => _apps = catalog);
+      setState(() => _catalog = catalog);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final filteredApps =
-        _apps.where((app) => app.id != widget.excludeAppId).toList();
+        _catalog.apps.where((app) => app.id != widget.excludeAppId).toList();
 
     if (filteredApps.isEmpty) return const SizedBox.shrink();
 
     final theme = Theme.of(context);
     final locale = Localizations.localeOf(context).languageCode;
-    final sectionTitle = widget.title ??
-        CrossPromoSection._defaultTitles[locale] ??
-        CrossPromoSection._defaultTitles['en']!;
+    final sectionTitle = widget.title ?? _catalog.sectionTitleFor(locale);
+    final buttonLabel = _catalog.buttonLabelFor(locale);
     final spacing = widget.style?.cardSpacing ?? 12.0;
 
     final sectionTitleStyle = widget.style?.sectionTitleStyle ??
@@ -103,21 +91,22 @@ class _CrossPromoSectionState extends State<CrossPromoSection> {
           SizedBox(height: spacing),
         ],
         if (widget.direction == Axis.vertical)
-          ..._buildVerticalList(filteredApps, spacing, locale)
+          ..._buildVerticalList(filteredApps, spacing, locale, buttonLabel)
         else
-          _buildHorizontalList(filteredApps, spacing, locale),
+          _buildHorizontalList(filteredApps, spacing, locale, buttonLabel),
       ],
     );
   }
 
   List<Widget> _buildVerticalList(
-      List<AppInfo> apps, double spacing, String locale) {
+      List<AppInfo> apps, double spacing, String locale, String buttonLabel) {
     final widgets = <Widget>[];
     for (var i = 0; i < apps.length; i++) {
       widgets.add(CrossPromoCard(
         app: apps[i],
         style: widget.style,
         locale: locale,
+        buttonLabel: buttonLabel,
         catalogService: widget.catalogService,
       ));
       if (i < apps.length - 1) {
@@ -128,7 +117,7 @@ class _CrossPromoSectionState extends State<CrossPromoSection> {
   }
 
   Widget _buildHorizontalList(
-      List<AppInfo> apps, double spacing, String locale) {
+      List<AppInfo> apps, double spacing, String locale, String buttonLabel) {
     return SizedBox(
       height: 100,
       child: ListView.separated(
@@ -141,6 +130,7 @@ class _CrossPromoSectionState extends State<CrossPromoSection> {
             app: apps[index],
             style: widget.style,
             locale: locale,
+            buttonLabel: buttonLabel,
             catalogService: widget.catalogService,
           ),
         ),

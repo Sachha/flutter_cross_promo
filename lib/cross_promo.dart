@@ -6,6 +6,7 @@ library;
 
 // Models
 export 'src/models/app_info.dart';
+export 'src/models/catalog.dart';
 export 'src/models/cross_promo_style.dart';
 
 // Data

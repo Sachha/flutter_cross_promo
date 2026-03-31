@@ -14,6 +14,7 @@ class CrossPromoCard extends StatelessWidget {
   final AppInfo app;
   final CrossPromoStyle? style;
   final String locale;
+  final String? buttonLabel;
   final CatalogService? catalogService;
 
   const CrossPromoCard({
@@ -21,6 +22,7 @@ class CrossPromoCard extends StatelessWidget {
     required this.app,
     this.style,
     this.locale = 'en',
+    this.buttonLabel,
     this.catalogService,
   });
 
@@ -43,7 +45,8 @@ class CrossPromoCard extends StatelessWidget {
     final buttonColor = style?.buttonColor ?? colorScheme.primary;
     final buttonTextColor =
         style?.buttonTextColor ?? colorScheme.onPrimary;
-    final buttonLabel = style?.buttonLabel ?? 'Download';
+    final resolvedButtonLabel =
+        style?.buttonLabel ?? buttonLabel ?? 'Download';
     final cardPadding = style?.cardPadding ?? const EdgeInsets.all(16);
 
     return Container(
@@ -93,8 +96,8 @@ class CrossPromoCard extends StatelessWidget {
             const SizedBox(width: 12),
 
             // CTA button
-            _buildButton(
-                buttonColor, buttonTextColor, buttonLabel, cardRadius),
+            _buildButton(buttonColor, buttonTextColor,
+                resolvedButtonLabel, cardRadius),
           ],
         ),
       ),
