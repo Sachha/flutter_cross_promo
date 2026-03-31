@@ -3,21 +3,23 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../data/catalog_service.dart';
 import '../models/app_info.dart';
 import '../models/cross_promo_style.dart';
 
 /// A compact horizontal banner promoting a single app.
-///
-/// Ideal for placing at the bottom of a settings screen
-/// or between content sections.
 class CrossPromoBanner extends StatelessWidget {
   final AppInfo app;
   final CrossPromoStyle? style;
+  final String locale;
+  final CatalogService? catalogService;
 
   const CrossPromoBanner({
     super.key,
     required this.app,
     this.style,
+    this.locale = 'en',
+    this.catalogService,
   });
 
   @override
@@ -43,7 +45,7 @@ class CrossPromoBanner extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(radius * 0.5),
-              child: SizedBox(width: 40, height: 40, child: app.icon),
+              child: _buildIcon(40),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -62,11 +64,11 @@ class CrossPromoBanner extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    app.description,
+                    app.descriptionFor(locale),
                     style: style?.descriptionStyle ??
                         theme.textTheme.bodySmall?.copyWith(
-                          color:
-                              colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: colorScheme.onSurface
+                              .withValues(alpha: 0.6),
                         ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -83,6 +85,29 @@ class CrossPromoBanner extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildIcon(double size) {
+    if (catalogService != null) {
+      return Image.network(
+        catalogService!.iconUrl(app.icon),
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (_, _, _) => _fallbackIcon(size),
+      );
+    }
+    return _fallbackIcon(size);
+  }
+
+  Widget _fallbackIcon(double size) {
+    return Image.asset(
+      'assets/${app.icon}',
+      package: 'cross_promo',
+      width: size,
+      height: size,
+      fit: BoxFit.cover,
     );
   }
 

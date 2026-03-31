@@ -1,26 +1,33 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cross_promo/cross_promo.dart';
 
 void main() {
-  test('CrossPromoSection filters out excluded app', () {
-    final apps = [
-      AppInfo(
-        id: 'app_a',
-        name: 'App A',
-        description: 'Description A',
-        icon: const Icon(Icons.star),
-      ),
-      AppInfo(
-        id: 'app_b',
-        name: 'App B',
-        description: 'Description B',
-        icon: const Icon(Icons.star),
-      ),
-    ];
+  test('AppInfo.descriptionFor returns correct locale', () {
+    const app = AppInfo(
+      id: 'test',
+      name: 'Test',
+      descriptions: {'en': 'English', 'fr': 'Français'},
+      icon: 'test.png',
+    );
 
-    // CrossPromoSection should exclude app_a and only show app_b
-    expect(apps.where((a) => a.id != 'app_a').length, 1);
-    expect(apps.where((a) => a.id != 'app_a').first.id, 'app_b');
+    expect(app.descriptionFor('fr'), 'Français');
+    expect(app.descriptionFor('en'), 'English');
+    expect(app.descriptionFor('de'), 'English'); // fallback to en
+  });
+
+  test('fallbackCatalog contains apps', () {
+    expect(fallbackCatalog.length, greaterThanOrEqualTo(2));
+    expect(fallbackCatalog.any((a) => a.id == 'tic_tac_go'), true);
+    expect(fallbackCatalog.any((a) => a.id == 'aouh'), true);
+  });
+
+  test('CatalogService builds correct icon URL', () {
+    final service = CatalogService(
+      repoRawBaseUrl: 'https://raw.githubusercontent.com/user/repo/main',
+    );
+    expect(
+      service.iconUrl('aouh.webp'),
+      'https://raw.githubusercontent.com/user/repo/main/assets/aouh.webp',
+    );
   });
 }
