@@ -58,5 +58,23 @@ const Catalog fallbackCatalog = Catalog(
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=studio.happyapp.aouh',
     ),
+    AppInfo(
+      id: 'happy_hour',
+      name: 'Happy Hour',
+      descriptions: {
+        'en': 'The party game to spice up your nights!',
+        'fr': 'Le jeu de soirée pour pimenter tes soirées !',
+        'es': '¡El juego para animar tus noches!',
+        'de': 'Das Partyspiel für unvergessliche Abende!',
+        'it': 'Il gioco per ravvivare le tue serate!',
+        'pt': 'O jogo para animar as tuas noites!',
+        'nl': 'Het partyspel om je avonden op te fleuren!',
+      },
+      icon: 'happy_hour.png',
+      appStoreUrl:
+          'https://apps.apple.com/app/happy-hour-party-games/id6504674815',
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=happyapp.happyhour',
+    ),
   ],
 );
