@@ -161,9 +161,7 @@ class CrossPromoCard extends StatelessWidget {
     final url = _storeUrl;
     if (url == null) return;
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   String? get _storeUrl {
