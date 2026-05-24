@@ -72,7 +72,7 @@ const Catalog fallbackCatalog = Catalog(
       },
       icon: 'happy_hour.webp',
       appStoreUrl:
-          'https://apps.apple.com/app/happy-hour-party-games/id6504674815',
+          'https://apps.apple.com/us/app/happyhour-party-games/id1536798029',
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=happyapp.happyhour',
     ),
