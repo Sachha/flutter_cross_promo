@@ -76,5 +76,22 @@ const Catalog fallbackCatalog = Catalog(
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=happyapp.happyhour',
     ),
+    AppInfo(
+      id: 'doku',
+      name: 'Doku',
+      descriptions: {
+        'en': 'The daily metro-station sudoku!',
+        'fr': 'Le sudoku des stations de métro, chaque jour !',
+        'es': '¡El sudoku de las estaciones de metro, cada día!',
+        'de': 'Das tägliche Metro-Stationen-Sudoku!',
+        'it': 'Il sudoku delle stazioni della metro, ogni giorno!',
+        'pt': 'O sudoku das estações de metro, todos os dias!',
+        'nl': 'De dagelijkse metrostation-sudoku!',
+      },
+      icon: 'doku.webp',
+      // appStoreUrl à renseigner une fois Doku publié sur l'App Store.
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
+    ),
   ],
 );
