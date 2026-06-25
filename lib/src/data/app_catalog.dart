@@ -6,13 +6,13 @@ import '../models/catalog.dart';
 /// Keep this in sync with catalog.json.
 const Catalog fallbackCatalog = Catalog(
   sectionTitles: {
-    'en': 'Discover our apps',
-    'fr': 'Découvre nos apps',
-    'es': 'Descubre nuestras apps',
-    'de': 'Entdecke unsere Apps',
-    'it': 'Scopri le nostre app',
-    'pt': 'Descobre as nossas apps',
-    'nl': 'Ontdek onze apps',
+    'en': 'Discover our other apps',
+    'fr': 'Découvre nos autres app',
+    'es': 'Descubre nuestras otras apps',
+    'de': 'Entdecke unsere anderen Apps',
+    'it': 'Scopri le nostre altre app',
+    'pt': 'Descobre as nossas outras apps',
+    'nl': 'Ontdek onze andere apps',
   },
   buttonLabels: {
     'en': 'Get',
@@ -25,21 +25,27 @@ const Catalog fallbackCatalog = Catalog(
   },
   apps: [
     AppInfo(
-      id: 'tic_tac_go',
-      name: 'Tic Tac Go!',
+      id: 'doku',
+      name: 'Doku',
       descriptions: {
-        'en': "Play Time's Up easily with friends!",
-        'fr': "Joue au Time's Up facilement entre amis !",
-        'es': "¡Juega al Time's Up fácilmente con amigos!",
-        'de': "Spiele Time's Up ganz einfach mit Freunden!",
-        'it': "Gioca a Time's Up facilmente con gli amici!",
-        'pt': "Joga ao Time's Up facilmente com amigos!",
-        'nl': "Speel Time's Up gemakkelijk met vrienden!",
+        'en': 'Daily sudoku with Metrodoku, Footdoku and many more universes!',
+        'fr':
+            "Le sudoku quotidien avec Metrodoku, Footdoku et plein d'autres univers !",
+        'es':
+            '¡El sudoku diario con Metrodoku, Footdoku y muchos más universos!',
+        'de':
+            'Das tägliche Sudoku mit Metrodoku, Footdoku und vielen weiteren Universen!',
+        'it':
+            'Il sudoku quotidiano con Metrodoku, Footdoku e tanti altri universi!',
+        'pt':
+            'O sudoku diário com Metrodoku, Footdoku e muitos outros universos!',
+        'nl':
+            "De dagelijkse sudoku met Metrodoku, Footdoku en vele andere thema's!",
       },
-      icon: 'tic_tac_go.webp',
-      appStoreUrl: 'https://apps.apple.com/app/tic-tac-go/id6761271201',
+      icon: 'doku.webp',
+      appStoreUrl: 'https://apps.apple.com/app/doku/id6777248325',
       playStoreUrl:
-          'https://play.google.com/store/apps/details?id=studio.happyapp.tictacgo',
+          'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
     ),
     AppInfo(
       id: 'aouh',
@@ -59,6 +65,23 @@ const Catalog fallbackCatalog = Catalog(
           'https://play.google.com/store/apps/details?id=studio.happyapp.aouh',
     ),
     AppInfo(
+      id: 'tic_tac_go',
+      name: 'Tic Tac Go!',
+      descriptions: {
+        'en': "Play Time's Up easily with friends!",
+        'fr': "Joue au Time's Up facilement entre amis !",
+        'es': "¡Juega al Time's Up fácilmente con amigos!",
+        'de': "Spiele Time's Up ganz einfach mit Freunden!",
+        'it': "Gioca a Time's Up facilmente con gli amici!",
+        'pt': "Joga ao Time's Up facilmente com amigos!",
+        'nl': "Speel Time's Up gemakkelijk met vrienden!",
+      },
+      icon: 'tic_tac_go.webp',
+      appStoreUrl: 'https://apps.apple.com/app/tic-tac-go/id6761271201',
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=studio.happyapp.tictacgo',
+    ),
+    AppInfo(
       id: 'happy_hour',
       name: 'Happy Hour',
       descriptions: {
@@ -75,23 +98,6 @@ const Catalog fallbackCatalog = Catalog(
           'https://apps.apple.com/us/app/happyhour-party-games/id1536798029',
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=happyapp.happyhour',
-    ),
-    AppInfo(
-      id: 'doku',
-      name: 'Doku',
-      descriptions: {
-        'en': 'The daily metro-station sudoku!',
-        'fr': 'Le sudoku des stations de métro, chaque jour !',
-        'es': '¡El sudoku de las estaciones de metro, cada día!',
-        'de': 'Das tägliche Metro-Stationen-Sudoku!',
-        'it': 'Il sudoku delle stazioni della metro, ogni giorno!',
-        'pt': 'O sudoku das estações de metro, todos os dias!',
-        'nl': 'De dagelijkse metrostation-sudoku!',
-      },
-      icon: 'doku.webp',
-      // appStoreUrl à renseigner une fois Doku publié sur l'App Store.
-      playStoreUrl:
-          'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
     ),
   ],
 );
