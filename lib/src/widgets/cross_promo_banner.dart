@@ -1,11 +1,9 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../data/catalog_service.dart';
 import '../models/app_info.dart';
 import '../models/cross_promo_style.dart';
+import '../platform/store_link.dart';
 
 /// A compact horizontal banner promoting a single app.
 class CrossPromoBanner extends StatelessWidget {
@@ -111,18 +109,5 @@ class CrossPromoBanner extends StatelessWidget {
     );
   }
 
-  Future<void> _onTap() async {
-    final url = _storeUrl;
-    if (url == null) return;
-    final uri = Uri.parse(url);
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
-
-  String? get _storeUrl {
-    try {
-      if (Platform.isIOS || Platform.isMacOS) return app.appStoreUrl;
-      if (Platform.isAndroid) return app.playStoreUrl;
-    } catch (_) {}
-    return app.appStoreUrl ?? app.playStoreUrl;
-  }
+  Future<void> _onTap() => openStore(app);
 }
