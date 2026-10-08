@@ -8,6 +8,7 @@ Cross-promote your Flutter apps to each other's users. Theme-adaptive widgets th
 - 🌍 Multi-language support (EN, FR, ES, DE, IT, PT, NL)
 - 🔄 Remote catalog: update app list & descriptions without releasing a new version
 - 📴 Offline fallback: works without network using embedded data
+- 🌐 Web support: no `dart:io`; in a browser, the store link follows the visitor's OS (App Store on iOS and macOS, Play Store on Android)
 
 ## Getting started
 
@@ -41,7 +42,7 @@ CrossPromoSection(
 )
 ```
 
-Available app IDs: `tic_tac_go`, `aouh`, `happy_hour`
+Available app IDs: `doku`, `aouh`, `tic_tac_go`, `happy_hour`
 
 ### 3. Customization
 
@@ -67,4 +68,8 @@ To update app descriptions, icons, or add new apps **without releasing a new ver
 3. Push to the `main` branch
 4. Changes will be reflected in all apps on next launch
 
-> 💡 Don't forget to also update `lib/src/data/app_catalog.dart` to keep the offline fallback in sync.
+> 💡 Don't forget to also update `lib/src/data/app_catalog.dart` to keep the offline fallback in sync: `test/catalog_files_test.dart` fails when the two differ, or when an icon is missing from `assets/`.
+
+## Development
+
+`tool/verify.sh` runs everything: analysis, tests on the VM and in Chrome (`SKIP_CHROME=1` to skip them), and the web builds (dart2js and dart2wasm) of the app in `example/`.
