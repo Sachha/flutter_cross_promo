@@ -83,15 +83,15 @@ const Catalog fallbackCatalog = Catalog(
     ),
     AppInfo(
       id: 'happy_hour',
-      name: 'Happy Hour',
+      name: 'Pypo',
       descriptions: {
-        'en': 'Hot party games all in one app!',
-        'fr': 'Des jeux de soirée hot réunis en une seule app !',
-        'es': '¡Juegos de fiesta picantes en una sola app!',
-        'de': 'Heiße Partyspiele in einer App!',
-        'it': "Giochi di società piccanti in un'unica app!",
-        'pt': 'Jogos de festa picantes numa só app!',
-        'nl': 'Pikante partyspellen in één app!',
+        'en': 'Party games with friends, on one phone or many!',
+        'fr': 'Des jeux de soirée entre amis, sur un ou plusieurs téléphones !',
+        'es': '¡Juegos de fiesta con amigos, en uno o varios móviles!',
+        'de': 'Partyspiele mit Freunden, auf einem oder mehreren Handys!',
+        'it': 'Giochi di festa con gli amici, su uno o più telefoni!',
+        'pt': 'Jogos de festa com amigos, num só telemóvel ou em vários!',
+        'nl': 'Partyspellen met vrienden, op één of meerdere telefoons!',
       },
       icon: 'happy_hour.webp',
       appStoreUrl:

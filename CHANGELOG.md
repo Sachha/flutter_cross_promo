@@ -1,3 +1,8 @@
+## 1.2.0
+
+* The `happy_hour` entry is renamed Pypo, with a new icon and a description
+  without any "hot" angle or alcohol. Same id, same store links.
+
 ## 1.1.0
 
 * Web: no more `dart:io` in `CrossPromoCard` and `CrossPromoBanner`. The store

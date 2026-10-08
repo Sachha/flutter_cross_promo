@@ -42,7 +42,7 @@ CrossPromoSection(
 )
 ```
 
-Available app IDs: `doku`, `aouh`, `tic_tac_go`, `happy_hour`
+Available app IDs: `doku`, `aouh`, `tic_tac_go`, `happy_hour` (the app now named Pypo: the id did not change)
 
 ### 3. Customization
 
