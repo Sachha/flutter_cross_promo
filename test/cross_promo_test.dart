@@ -16,9 +16,10 @@ void main() {
   });
 
   test('Catalog localized getters work', () {
-    expect(fallbackCatalog.sectionTitleFor('fr'), 'Découvre nos apps');
+    expect(fallbackCatalog.sectionTitleFor('fr'), 'Découvre nos autres app');
     expect(fallbackCatalog.buttonLabelFor('fr'), 'Obtenir');
-    expect(fallbackCatalog.sectionTitleFor('zh'), 'Discover our apps');
+    // Unknown locale: English.
+    expect(fallbackCatalog.sectionTitleFor('zh'), 'Discover our other apps');
     expect(fallbackCatalog.buttonLabelFor('zh'), 'Get');
   });
 
