@@ -7,7 +7,7 @@ import '../models/catalog.dart';
 const Catalog fallbackCatalog = Catalog(
   sectionTitles: {
     'en': 'Discover our other apps',
-    'fr': 'Découvre nos autres app',
+    'fr': 'Découvre nos autres apps',
     'es': 'Descubre nuestras otras apps',
     'de': 'Entdecke unsere anderen Apps',
     'it': 'Scopri le nostre altre app',

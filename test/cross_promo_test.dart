@@ -16,7 +16,7 @@ void main() {
   });
 
   test('Catalog localized getters work', () {
-    expect(fallbackCatalog.sectionTitleFor('fr'), 'Découvre nos autres app');
+    expect(fallbackCatalog.sectionTitleFor('fr'), 'Découvre nos autres apps');
     expect(fallbackCatalog.buttonLabelFor('fr'), 'Obtenir');
     // Unknown locale: English.
     expect(fallbackCatalog.sectionTitleFor('zh'), 'Discover our other apps');
