@@ -28,24 +28,40 @@ const Catalog fallbackCatalog = Catalog(
       id: 'doku',
       name: 'Doku',
       descriptions: {
-        'en': 'Daily sudoku with Metrodoku, Footdoku and many more universes!',
+        'en': 'Daily sudoku with metro stations, countries, Pokémon and more!',
         'fr':
-            "Le sudoku quotidien avec Metrodoku, Footdoku et plein d'autres univers !",
+            'Le sudoku quotidien : stations de métro, pays, Pokémon et plus !',
         'es':
-            '¡El sudoku diario con Metrodoku, Footdoku y muchos más universos!',
+            '¡El sudoku diario con estaciones de metro, países, Pokémon y más!',
         'de':
-            'Das tägliche Sudoku mit Metrodoku, Footdoku und vielen weiteren Universen!',
+            'Das tägliche Sudoku mit U-Bahn-Stationen, Ländern, Pokémon und mehr!',
         'it':
-            'Il sudoku quotidiano con Metrodoku, Footdoku e tanti altri universi!',
-        'pt':
-            'O sudoku diário com Metrodoku, Footdoku e muitos outros universos!',
+            'Il sudoku quotidiano con stazioni della metro, paesi, Pokémon e altro!',
+        'pt': 'O sudoku diário com estações de metrô, países, Pokémon e mais!',
         'nl':
-            "De dagelijkse sudoku met Metrodoku, Footdoku en vele andere thema's!",
+            'De dagelijkse sudoku met metrostations, landen, Pokémon en meer!',
       },
       icon: 'doku.webp',
       appStoreUrl: 'https://apps.apple.com/app/doku/id6777248325',
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
+    ),
+    AppInfo(
+      id: 'rise',
+      name: 'Rise',
+      descriptions: {
+        'en': 'Quit any addiction with your phoenix by your side!',
+        'fr': 'Libère-toi de tes addictions avec ton phénix !',
+        'es': '¡Libérate de tus adicciones con tu fénix!',
+        'de': 'Befrei dich von deinen Süchten mit deinem Phönix!',
+        'it': 'Liberati dalle dipendenze con la tua fenice!',
+        'pt': 'Liberta-te dos teus vícios com a tua fénix!',
+        'nl': 'Bevrijd jezelf van je verslavingen met je feniks!',
+      },
+      icon: 'rise.webp',
+      appStoreUrl: 'https://apps.apple.com/app/rise/id6760611764',
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=studio.happyapp.rise',
     ),
     AppInfo(
       id: 'aouh',
