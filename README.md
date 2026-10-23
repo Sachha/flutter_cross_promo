@@ -41,7 +41,7 @@ CrossPromoSection(
 )
 ```
 
-Available app IDs: `tic_tac_go`, `aouh`, `happy_hour`
+Available app IDs: `doku`, `rise`, `aouh`, `tic_tac_go`, `happy_hour`
 
 ### 3. Customization
 
