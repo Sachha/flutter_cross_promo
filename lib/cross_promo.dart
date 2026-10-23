@@ -13,6 +13,12 @@ export 'src/models/cross_promo_style.dart';
 export 'src/data/app_catalog.dart';
 export 'src/data/catalog_service.dart';
 
+// House ads (full-screen ads for the studio's apps)
+export 'src/house_ads/house_ad.dart';
+export 'src/house_ads/house_ad_strings.dart';
+export 'src/house_ads/house_ad_style.dart';
+export 'src/house_ads/house_ad_view.dart';
+
 // Widgets
 export 'src/widgets/cross_promo_card.dart';
 export 'src/widgets/cross_promo_banner.dart';

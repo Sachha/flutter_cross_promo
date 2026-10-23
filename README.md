@@ -8,6 +8,7 @@ Cross-promote your Flutter apps to each other's users. Theme-adaptive widgets th
 - 🌍 Multi-language support (EN, FR, ES, DE, IT, PT, NL)
 - 🔄 Remote catalog: update app list & descriptions without releasing a new version
 - 📴 Offline fallback: works without network using embedded data
+- 📺 House ads: a full-screen ad for another app of the studio, when the ad network has nothing to show
 - 🌐 Web support: no `dart:io`; in a browser, the store link follows the visitor's OS (App Store on iOS and macOS, Play Store on Android)
 
 ## Getting started
@@ -58,6 +59,35 @@ CrossPromoSection(
   ),
 )
 ```
+
+### 4. House ads
+
+A full-screen ad for an app of the studio, to show at the moments where the
+host app would show an interstitial (the host app keeps the pacing, the
+forbidden moments and the consent rules; this package only picks the ad and
+renders it):
+
+```dart
+final others = studioAppsInOrder(['doku', 'aouh'], selfId: 'happy_hour');
+final ad = houseAdAt(rotationIndex, selfEvery: 0, others: others); // never self
+if (ad != null) {
+  await Navigator.of(context).push(MaterialPageRoute(
+    fullscreenDialog: true,
+    builder: (context) => HouseAdView(
+      ad: ad,
+      links: houseAdLinks(ad, houseAdStoresFor(defaultTargetPlatform),
+          campaign: 'myapp_house'),
+      onClose: () => Navigator.of(context).pop(),
+      // Optional: strings: HouseAdStrings.of('fr').copyWith(...),
+      // style: HouseAdStyle(button: ..., qr: ..., background: ...),
+    ),
+  ));
+}
+```
+
+`selfEvery: 2` alternates the host app's own ad (`SelfAppAd`, with
+`selfName`, `selfHero` and links from `selfLink`) with the other apps.
+Texts are built in for EN, FR, ES, DE and IT.
 
 ## Updating the catalog
 
