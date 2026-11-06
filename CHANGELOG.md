@@ -1,3 +1,10 @@
+## 1.4.0
+
+* House ads: `qrLink` on `HouseAdView` and `HouseInstallPanel`. On a
+  computer, a single QR of that link (an address of the host app's site
+  that sends each phone to its own store) above both store links, instead
+  of one QR per store. Without it, nothing changes.
+
 ## 1.3.0
 
 * House ads: a full-screen ad for an app of the studio, to show instead of

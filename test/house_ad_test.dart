@@ -222,6 +222,67 @@ void main() {
       expect(find.text('Scan with your phone'), findsOneWidget);
     });
 
+    testWidgets('computer with qrLink: one QR above both store links', (
+      tester,
+    ) async {
+      final qrs = <String>[];
+      final opened = <Uri>[];
+      final links = {
+        HouseAdStore.appStore: Uri.parse('https://apps/x'),
+        HouseAdStore.play: Uri.parse('https://play/x'),
+      };
+      await _pump(
+        tester,
+        HouseAdView(
+          ad: const SelfAppAd(),
+          links: links,
+          qrLink: Uri.parse('https://example.app/get'),
+          onClose: () {},
+          onOpen: (uri) async => opened.add(uri),
+          selfName: 'Pypo',
+          style: HouseAdStyle(
+            qr: (_, data, size) {
+              qrs.add(data);
+              return SizedBox(width: size, height: size);
+            },
+          ),
+        ),
+      );
+      expect(find.byKey(HouseAdKeys.qr), findsOneWidget);
+      expect(qrs, ['https://example.app/get']);
+      final apple = find.byKey(HouseAdKeys.store(HouseAdStore.appStore));
+      final play = find.byKey(HouseAdKeys.store(HouseAdStore.play));
+      expect(tester.getTopLeft(apple).dy, tester.getTopLeft(play).dy);
+      expect(tester.getTopLeft(apple).dx, lessThan(tester.getTopLeft(play).dx));
+      expect(find.text('Scan with your phone'), findsOneWidget);
+      await tester.tap(apple);
+      await tester.tap(play);
+      expect(opened, [links[HouseAdStore.appStore], links[HouseAdStore.play]]);
+    });
+
+    testWidgets('phone with qrLink: still the store button', (tester) async {
+      final qrs = <String>[];
+      await _pump(
+        tester,
+        HouseAdView(
+          ad: const SelfAppAd(),
+          links: {HouseAdStore.play: Uri.parse('https://play/x')},
+          qrLink: Uri.parse('https://example.app/get'),
+          onClose: () {},
+          selfName: 'Pypo',
+          style: HouseAdStyle(
+            qr: (_, data, size) {
+              qrs.add(data);
+              return SizedBox(width: size, height: size);
+            },
+          ),
+        ),
+      );
+      expect(find.byKey(HouseAdKeys.qr), findsNothing);
+      expect(qrs, isEmpty);
+      expect(find.byKey(HouseAdKeys.store(HouseAdStore.play)), findsOneWidget);
+    });
+
     testWidgets('no link: no install panel', (tester) async {
       await _pump(
         tester,

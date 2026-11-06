@@ -42,8 +42,9 @@ Future<void> openHouseAdLink(Uri uri) async {
 ///
 /// [links]: store links of [ad] for this device ([houseAdLinks]); one link
 /// gives a store button, several give QR codes (with [HouseAdStyle.qr]) and
-/// links. For a [SelfAppAd], [selfName] is the host app's name and
-/// [selfHero] an optional illustration above the title.
+/// links, or a single QR of [qrLink] ([HouseInstallPanel.qrLink]). For a
+/// [SelfAppAd], [selfName] is the host app's name and [selfHero] an optional
+/// illustration above the title.
 class HouseAdView extends StatefulWidget {
   const HouseAdView({
     super.key,
@@ -56,11 +57,15 @@ class HouseAdView extends StatefulWidget {
     this.onOpen = openHouseAdLink,
     this.selfName = '',
     this.selfHero,
+    this.qrLink,
   });
 
   final HouseAd ad;
   final Map<HouseAdStore, Uri> links;
   final VoidCallback onClose;
+
+  /// Single QR for both stores ([HouseInstallPanel.qrLink]).
+  final Uri? qrLink;
 
   /// Texts; default: [HouseAdStrings.of] the current locale.
   final HouseAdStrings? strings;
@@ -215,6 +220,7 @@ class _HouseAdViewState extends State<HouseAdView> {
         strings: s,
         style: style,
         onOpen: widget.onOpen,
+        qrLink: widget.qrLink,
       ),
     ];
   }
@@ -264,6 +270,7 @@ class _HouseAdViewState extends State<HouseAdView> {
         strings: s,
         style: style,
         onOpen: widget.onOpen,
+        qrLink: widget.qrLink,
       ),
     ];
   }
@@ -271,8 +278,8 @@ class _HouseAdViewState extends State<HouseAdView> {
 
 /// Installing the app of a house ad: on a phone (one store), a button to
 /// the store page; on a computer (both stores), their QR codes to scan with
-/// the phone ([HouseAdStyle.qr]), with clickable links. Nothing without a
-/// link.
+/// the phone ([HouseAdStyle.qr]), with clickable links, or a single QR of
+/// [qrLink] above both links. Nothing without a link.
 class HouseInstallPanel extends StatelessWidget {
   const HouseInstallPanel({
     super.key,
@@ -281,9 +288,16 @@ class HouseInstallPanel extends StatelessWidget {
     this.strings,
     this.style = const HouseAdStyle(),
     this.onOpen = openHouseAdLink,
+    this.qrLink,
   });
 
   final Map<HouseAdStore, Uri> links;
+
+  /// Link of a single QR on a computer, instead of one QR per store: an
+  /// address that sends each phone to its own store (redirect served by the
+  /// host app's site, by user agent). Null: one QR per store. Not used with
+  /// a single link (phone: store button).
+  final Uri? qrLink;
 
   /// Label of the store button on a phone ("Install Doku").
   final String installLabel;
@@ -314,6 +328,42 @@ class HouseInstallPanel extends StatelessWidget {
     final qr = style.qr;
     String name(HouseAdStore st) =>
         st == HouseAdStore.appStore ? s.appStore : s.play;
+    Widget storeButton(HouseAdStore st, Uri uri) => button(
+      context,
+      HouseAdButton(
+        key: HouseAdKeys.store(st),
+        kind: HouseAdButtonKind.store,
+        label: name(st),
+        onPressed: () => unawaited(onOpen(uri)),
+      ),
+    );
+    final hint = qr == null
+        ? null
+        : Text(
+            s.scan,
+            style: style.hintStyle ?? Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          );
+    if (qr != null && qrLink != null) {
+      return Column(
+        key: HouseAdKeys.qr,
+        children: [
+          qr(context, qrLink.toString(), style.qrSize),
+          SizedBox(height: sp.xSmall),
+          Wrap(
+            spacing: sp.small,
+            runSpacing: sp.xSmall,
+            alignment: WrapAlignment.center,
+            children: [
+              for (final MapEntry(key: st, value: uri) in links.entries)
+                storeButton(st, uri),
+            ],
+          ),
+          SizedBox(height: sp.small),
+          hint!,
+        ],
+      );
+    }
     return Column(
       key: HouseAdKeys.qr,
       children: [
@@ -330,27 +380,12 @@ class HouseInstallPanel extends StatelessWidget {
                     qr(context, uri.toString(), style.qrSize),
                     SizedBox(height: sp.xSmall),
                   ],
-                  button(
-                    context,
-                    HouseAdButton(
-                      key: HouseAdKeys.store(st),
-                      kind: HouseAdButtonKind.store,
-                      label: name(st),
-                      onPressed: () => unawaited(onOpen(uri)),
-                    ),
-                  ),
+                  storeButton(st, uri),
                 ],
               ),
           ],
         ),
-        if (qr != null) ...[
-          SizedBox(height: sp.small),
-          Text(
-            s.scan,
-            style: style.hintStyle ?? Theme.of(context).textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-        ],
+        if (hint != null) ...[SizedBox(height: sp.small), hint],
       ],
     );
   }

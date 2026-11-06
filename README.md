@@ -88,6 +88,9 @@ if (ad != null) {
 `selfEvery: 2` alternates the host app's own ad (`SelfAppAd`, with
 `selfName`, `selfHero` and links from `selfLink`) with the other apps.
 Texts are built in for EN, FR, ES, DE and IT.
+On a computer, both stores get a QR code; pass `qrLink` (an address of your
+site that redirects each phone to its own store, by user agent) to show a
+single QR above the two store links instead.
 
 ## Updating the catalog
 
