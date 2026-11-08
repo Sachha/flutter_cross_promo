@@ -47,23 +47,6 @@ const Catalog fallbackCatalog = Catalog(
           'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
     ),
     AppInfo(
-      id: 'rise',
-      name: 'Rise',
-      descriptions: {
-        'en': 'Quit any addiction with your phoenix by your side!',
-        'fr': 'Libère-toi de tes addictions avec ton phénix !',
-        'es': '¡Libérate de tus adicciones con tu fénix!',
-        'de': 'Befrei dich von deinen Süchten mit deinem Phönix!',
-        'it': 'Liberati dalle dipendenze con la tua fenice!',
-        'pt': 'Liberta-te dos teus vícios com a tua fénix!',
-        'nl': 'Bevrijd jezelf van je verslavingen met je feniks!',
-      },
-      icon: 'rise.webp',
-      appStoreUrl: 'https://apps.apple.com/app/rise/id6760611764',
-      playStoreUrl:
-          'https://play.google.com/store/apps/details?id=studio.happyapp.rise',
-    ),
-    AppInfo(
       id: 'aouh',
       name: 'Aouh',
       descriptions: {
@@ -79,6 +62,24 @@ const Catalog fallbackCatalog = Catalog(
       appStoreUrl: 'https://apps.apple.com/app/aouh/id6759094186',
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=studio.happyapp.aouh',
+    ),
+    AppInfo(
+      id: 'happy_hour',
+      name: 'Pypo',
+      descriptions: {
+        'en': 'Party games with friends, on one phone or many!',
+        'fr': 'Des jeux de soirée entre amis, sur un ou plusieurs téléphones !',
+        'es': '¡Juegos de fiesta con amigos, en uno o varios móviles!',
+        'de': 'Partyspiele mit Freunden, auf einem oder mehreren Handys!',
+        'it': 'Giochi di festa con gli amici, su uno o più telefoni!',
+        'pt': 'Jogos de festa com amigos, num só telemóvel ou em vários!',
+        'nl': 'Partyspellen met vrienden, op één of meerdere telefoons!',
+      },
+      icon: 'happy_hour.webp',
+      appStoreUrl:
+          'https://apps.apple.com/us/app/happyhour-party-games/id1536798029',
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=happyapp.happyhour',
     ),
     AppInfo(
       id: 'tic_tac_go',
@@ -98,22 +99,21 @@ const Catalog fallbackCatalog = Catalog(
           'https://play.google.com/store/apps/details?id=studio.happyapp.tictacgo',
     ),
     AppInfo(
-      id: 'happy_hour',
-      name: 'Pypo',
+      id: 'rise',
+      name: 'Rise',
       descriptions: {
-        'en': 'Party games with friends, on one phone or many!',
-        'fr': 'Des jeux de soirée entre amis, sur un ou plusieurs téléphones !',
-        'es': '¡Juegos de fiesta con amigos, en uno o varios móviles!',
-        'de': 'Partyspiele mit Freunden, auf einem oder mehreren Handys!',
-        'it': 'Giochi di festa con gli amici, su uno o più telefoni!',
-        'pt': 'Jogos de festa com amigos, num só telemóvel ou em vários!',
-        'nl': 'Partyspellen met vrienden, op één of meerdere telefoons!',
+        'en': 'Quit any addiction with your phoenix by your side!',
+        'fr': 'Libère-toi de tes addictions avec ton phénix !',
+        'es': '¡Libérate de tus adicciones con tu fénix!',
+        'de': 'Befrei dich von deinen Süchten mit deinem Phönix!',
+        'it': 'Liberati dalle dipendenze con la tua fenice!',
+        'pt': 'Liberta-te dos teus vícios com a tua fénix!',
+        'nl': 'Bevrijd jezelf van je verslavingen met je feniks!',
       },
-      icon: 'happy_hour.webp',
-      appStoreUrl:
-          'https://apps.apple.com/us/app/happyhour-party-games/id1536798029',
+      icon: 'rise.webp',
+      appStoreUrl: 'https://apps.apple.com/app/rise/id6760611764',
       playStoreUrl:
-          'https://play.google.com/store/apps/details?id=happyapp.happyhour',
+          'https://play.google.com/store/apps/details?id=studio.happyapp.rise',
     ),
   ],
 );
