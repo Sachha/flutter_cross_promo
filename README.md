@@ -92,6 +92,29 @@ On a computer, both stores get a QR code; pass `qrLink` (an address of your
 site that redirects each phone to its own store, by user agent) to show a
 single QR above the two store links instead.
 
+### 5. Promo videos (house ads)
+
+An app of the catalog can have a short promo video per locale (`videos`,
+English fallback with `videoFor(locale)`): a light, silent, vertical MP4
+hosted on the studio site, so it can change without a release.
+
+```json
+"videos": {
+  "fr": "https://happyapp.studio/apps/doku/promo/doku-pays-fr-v1.mp4",
+  "en": "https://happyapp.studio/apps/doku/promo/doku-pays-en-v1.mp4"
+}
+```
+
+1. `tool/promo_video.sh <reel.mp4> <out.mp4>` (540 px wide, no sound,
+   15 s at most, ~0.5 MB), into `happyapp-studio/apps/<app>/promo/`.
+2. Push the site (its CI deploys `happyapp.studio/apps/<app>/promo/…`).
+3. Then the URL in `catalog.json` and `lib/src/data/app_catalog.dart`.
+
+A new video always gets a new file name (`-v2`): host apps cache videos by
+URL. The package only carries the URLs; downloading and playing them is up
+to the host app (Tic Tac Go downloads them during the game and falls back
+to the icon).
+
 ## Updating the catalog
 
 To update app descriptions, icons, or add new apps **without releasing a new version** of your apps:

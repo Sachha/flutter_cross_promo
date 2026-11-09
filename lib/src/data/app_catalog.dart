@@ -45,6 +45,10 @@ const Catalog fallbackCatalog = Catalog(
       appStoreUrl: 'https://apps.apple.com/app/doku/id6777248325',
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=studio.happyapp.doku',
+      videos: {
+        'fr': 'https://happyapp.studio/apps/doku/promo/doku-pays-fr-v1.mp4',
+        'en': 'https://happyapp.studio/apps/doku/promo/doku-pays-en-v1.mp4',
+      },
     ),
     AppInfo(
       id: 'aouh',

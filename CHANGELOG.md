@@ -1,3 +1,12 @@
+## 1.5.0
+
+* `AppInfo.videos` (`videos` in `catalog.json`, optional): a short promo
+  video per locale for house ads, and `videoFor(locale)` (English
+  fallback). Light, silent, vertical MP4 hosted on the studio site
+  (`happyapp.studio/apps/<app>/promo/`), so it can change without a
+  release. Older versions of the package ignore the field.
+* `tool/promo_video.sh`: turns a reel into that light video.
+
 ## 1.4.0
 
 * House ads: `qrLink` on `HouseAdView` and `HouseInstallPanel`. On a

@@ -15,6 +15,7 @@ Map<String, Object?> _appJson(AppInfo app) => {
   'icon': app.icon,
   'appStoreUrl': app.appStoreUrl,
   'playStoreUrl': app.playStoreUrl,
+  'videos': app.videos,
 };
 
 void main() {
@@ -34,6 +35,17 @@ void main() {
   test('every icon of the catalog is an asset of the package', () {
     for (final app in fallbackCatalog.apps) {
       expect(File('assets/${app.icon}').existsSync(), isTrue, reason: app.id);
+    }
+  });
+
+  test('promo videos: https MP4 links of the studio site', () {
+    for (final app in fallbackCatalog.apps) {
+      for (final MapEntry(key: lang, value: url) in app.videos.entries) {
+        final uri = Uri.parse(url);
+        expect(uri.scheme, 'https', reason: '${app.id} $lang');
+        expect(uri.host, 'happyapp.studio', reason: '${app.id} $lang');
+        expect(uri.path, endsWith('.mp4'), reason: '${app.id} $lang');
+      }
     }
   });
 

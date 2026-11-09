@@ -18,6 +18,11 @@ class AppInfo {
   /// Play Store URL (Android).
   final String? playStoreUrl;
 
+  /// Short promo video per locale (house ads): key = locale code, value =
+  /// URL of a light, silent, vertical MP4. Hosted outside the apps, so it
+  /// can change without a release; empty when the app has none.
+  final Map<String, String> videos;
+
   const AppInfo({
     required this.id,
     required this.name,
@@ -25,11 +30,15 @@ class AppInfo {
     required this.icon,
     this.appStoreUrl,
     this.playStoreUrl,
+    this.videos = const {},
   });
 
   /// Returns the localized description, falling back to English.
   String descriptionFor(String locale) =>
       descriptions[locale] ?? descriptions['en'] ?? '';
+
+  /// Promo video for [locale], falling back to English; null without one.
+  String? videoFor(String locale) => videos[locale] ?? videos['en'];
 
   factory AppInfo.fromJson(Map<String, dynamic> json) => AppInfo(
         id: json['id'] as String,
@@ -38,5 +47,8 @@ class AppInfo {
         icon: json['icon'] as String,
         appStoreUrl: json['appStoreUrl'] as String?,
         playStoreUrl: json['playStoreUrl'] as String?,
+        videos: json['videos'] is Map
+            ? Map<String, String>.from(json['videos'] as Map)
+            : const {},
       );
 }
