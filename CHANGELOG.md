@@ -1,3 +1,9 @@
+## 1.6.0
+
+* House ads: `studioVisual` on `HouseAdView`, a visual of a studio app
+  shown instead of its icon (its promo video, played by the host app).
+  Without it, or when it returns null, nothing changes.
+
 ## 1.5.0
 
 * `AppInfo.videos` (`videos` in `catalog.json`, optional): a short promo

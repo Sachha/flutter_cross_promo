@@ -222,6 +222,27 @@ void main() {
       expect(find.text('Scan with your phone'), findsOneWidget);
     });
 
+    testWidgets('studio app: studioVisual instead of the icon, icon if null', (
+      tester,
+    ) async {
+      final app = studioAppsInOrder(const [], selfId: _selfId).first;
+      Widget view(Widget? visual) => HouseAdView(
+        ad: StudioAppAd(app),
+        links: {HouseAdStore.play: Uri.parse('https://play/x')},
+        onClose: () {},
+        studioVisual: (_, a) {
+          expect(a.id, app.id);
+          return visual;
+        },
+      );
+      await _pump(tester, view(const SizedBox(key: ValueKey('video'))));
+      expect(find.byKey(const ValueKey('video')), findsOneWidget);
+      expect(find.byType(Image), findsNothing);
+      await _pump(tester, view(null));
+      expect(find.byKey(const ValueKey('video')), findsNothing);
+      expect(find.byType(Image), findsOneWidget);
+    });
+
     testWidgets('computer with qrLink: one QR above both store links', (
       tester,
     ) async {

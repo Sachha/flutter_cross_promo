@@ -113,7 +113,8 @@ hosted on the studio site, so it can change without a release.
 A new video always gets a new file name (`-v2`): host apps cache videos by
 URL. The package only carries the URLs; downloading and playing them is up
 to the host app (Tic Tac Go downloads them during the game and falls back
-to the icon).
+to the icon). With the shared `HouseAdView`, the host app passes its
+player as `studioVisual` (Pypo).
 
 ## Updating the catalog
 

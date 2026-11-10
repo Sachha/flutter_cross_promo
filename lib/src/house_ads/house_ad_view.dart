@@ -58,6 +58,7 @@ class HouseAdView extends StatefulWidget {
     this.selfName = '',
     this.selfHero,
     this.qrLink,
+    this.studioVisual,
   });
 
   final HouseAd ad;
@@ -74,6 +75,11 @@ class HouseAdView extends StatefulWidget {
   final Future<void> Function(Uri uri) onOpen;
   final String selfName;
   final Widget? selfHero;
+
+  /// Visual of a [StudioAppAd] instead of the app icon (its promo video,
+  /// [AppInfo.videoFor], played by the host app). Null, or a null result:
+  /// the icon.
+  final Widget? Function(BuildContext context, AppInfo app)? studioVisual;
 
   @override
   State<HouseAdView> createState() => _HouseAdViewState();
@@ -238,17 +244,19 @@ class _HouseAdViewState extends State<HouseAdView> {
       ),
       SizedBox(height: sp.medium),
       Center(
-        child: ClipRRect(
-          borderRadius: style.iconRadius,
-          child: Image.asset(
-            'assets/${app.icon}',
-            package: 'cross_promo',
-            width: size,
-            height: size,
-            fit: BoxFit.cover,
-            errorBuilder: (_, _, _) => SizedBox(width: size, height: size),
-          ),
-        ),
+        child:
+            widget.studioVisual?.call(context, app) ??
+            ClipRRect(
+              borderRadius: style.iconRadius,
+              child: Image.asset(
+                'assets/${app.icon}',
+                package: 'cross_promo',
+                width: size,
+                height: size,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => SizedBox(width: size, height: size),
+              ),
+            ),
       ),
       SizedBox(height: sp.medium),
       Text(
