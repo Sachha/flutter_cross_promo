@@ -82,6 +82,7 @@ class HouseAdStyle {
     this.iconSize = 96,
     this.qrSize = 148,
     this.spacing = const HouseAdSpacing(),
+    this.bodyAlignment = MainAxisAlignment.start,
   });
 
   /// Wraps the content (inside the [Scaffold]), for a background image or
@@ -118,6 +119,13 @@ class HouseAdStyle {
   final double iconSize;
   final double qrSize;
   final HouseAdSpacing spacing;
+
+  /// Vertical placement of the body (overline, visual, texts, install
+  /// panel) under the top bar, when it is shorter than the screen:
+  /// [MainAxisAlignment.start] (default) at the top,
+  /// [MainAxisAlignment.center] centered (an icon without a video leaves
+  /// the bottom of a tall phone empty). A longer body scrolls either way.
+  final MainAxisAlignment bodyAlignment;
 }
 
 /// Default buttons: filled for the install button, outlined for skip, text

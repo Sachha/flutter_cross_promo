@@ -1,3 +1,10 @@
+## 1.8.0
+
+* House ads: `HouseAdStyle.bodyAlignment`, the vertical placement of the
+  body when it is shorter than the screen. `MainAxisAlignment.center`
+  centers it (an icon without a video leaves the bottom of a tall phone
+  empty). Default `start`: nothing changes.
+
 ## 1.7.0
 
 * Button label: "Discover" instead of "Get" (7 languages).

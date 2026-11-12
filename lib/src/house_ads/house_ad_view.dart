@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -171,17 +172,35 @@ class _HouseAdViewState extends State<HouseAdView> {
                 ),
               ),
               Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    sp.gutter,
-                    sp.block,
-                    sp.gutter,
-                    sp.block,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: body,
-                  ),
+                child: LayoutBuilder(
+                  builder: (context, box) {
+                    final column = Column(
+                      mainAxisAlignment: style.bodyAlignment,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: body,
+                    );
+                    return SingleChildScrollView(
+                      padding: EdgeInsets.fromLTRB(
+                        sp.gutter,
+                        sp.block,
+                        sp.gutter,
+                        sp.block,
+                      ),
+                      // At least as tall as the screen, so that the
+                      // alignment has room to place a short body.
+                      child: style.bodyAlignment == MainAxisAlignment.start
+                          ? column
+                          : ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: math.max(
+                                  0,
+                                  box.maxHeight - 2 * sp.block,
+                                ),
+                              ),
+                              child: column,
+                            ),
+                    );
+                  },
                 ),
               ),
             ],

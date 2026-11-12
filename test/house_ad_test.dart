@@ -304,6 +304,29 @@ void main() {
       expect(find.byKey(HouseAdKeys.store(HouseAdStore.play)), findsOneWidget);
     });
 
+    testWidgets('bodyAlignment: top by default, centered on request', (
+      tester,
+    ) async {
+      Widget view(MainAxisAlignment alignment) => HouseAdView(
+        ad: StudioAppAd(aouh),
+        links: {HouseAdStore.play: Uri.parse('https://play/x')},
+        onClose: () {},
+        style: HouseAdStyle(bodyAlignment: alignment),
+      );
+      double titleTop() =>
+          tester.getTopLeft(find.byKey(HouseAdKeys.studio(aouh.id))).dy;
+      await _pump(tester, view(MainAxisAlignment.start));
+      final top = titleTop();
+      await _pump(tester, view(MainAxisAlignment.center));
+      expect(titleTop(), greaterThan(top + 50));
+      expect(tester.takeException(), isNull);
+
+      // Taller than the screen: it scrolls instead of overflowing.
+      tester.view.physicalSize = const Size(320, 300);
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('no link: no install panel', (tester) async {
       await _pump(
         tester,
