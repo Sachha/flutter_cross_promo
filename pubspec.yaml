@@ -1,6 +1,6 @@
 name: cross_promo
 description: Cross-promote your Flutter apps to each other's users. Theme-adaptive widgets that integrate naturally into any app.
-version: 1.6.0
+version: 1.7.0
 
 environment:
   sdk: ^3.11.0

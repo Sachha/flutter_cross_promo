@@ -1,3 +1,9 @@
+## 1.7.0
+
+* Button label: "Discover" instead of "Get" (7 languages).
+* Shorter app descriptions (45 characters at most, 7 languages), so they
+  fit the card and the house ad without being cut.
+
 ## 1.6.0
 
 * House ads: `studioVisual` on `HouseAdView`, a visual of a studio app
